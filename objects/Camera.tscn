@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Environment" id=7]
+background_mode = 1
+ambient_light_color = Color( 0.419608, 0.647059, 0.8, 1 )
+ambient_light_energy = 0.35
+
+[node name="Camera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 100, 100 )
+environment = SubResource( 7 )
+projection = 1
+size = 220.0
+far = 242.0

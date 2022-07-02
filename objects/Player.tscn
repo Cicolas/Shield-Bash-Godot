@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://scripts/DashBehaviour.gd" type="Script" id=2]
+[ext_resource path="res://objects/body.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/PlayerData.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=13]
+radius = 4.0
+height = 4.0
+
+[node name="Player" type="KinematicBody"]
+collision_mask = 7
+script = ExtResource( 1 )
+vel = 40.0
+jump_force = 80.0
+
+[node name="PlayerData" type="Node" parent="."]
+script = ExtResource( 4 )
+max_life = 10
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 13 )
+
+[node name="body" parent="." instance=ExtResource( 3 )]
+
+[node name="Behaviours" type="Node" parent="."]
+
+[node name="DashBehaviour" type="Node" parent="Behaviours"]
+script = ExtResource( 2 )
+cooldown_time = 1.0
+force = 280.0
+dash_time = 0.1
+
+[connection signal="take_damage" from="." to="PlayerData" method="_on_Player_take_damage"]
+[connection signal="dash_finished" from="Behaviours/DashBehaviour" to="." method="_on_DashBehaviour_dash_finished"]

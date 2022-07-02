@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scripts/BasicEnemyBody.gd" type="Script" id=1]
+[ext_resource path="res://scripts/EnemyBaseBehaviour.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleMesh" id=8]
+radius = 3.0
+mid_height = 5.0
+
+[sub_resource type="CapsuleShape" id=9]
+radius = 3.0
+height = 5.0
+
+[node name="Dummy" type="KinematicBody"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+script = ExtResource( 1 )
+drag = 0.25
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 8 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+shape = SubResource( 9 )
+
+[node name="Behaviours" type="Node" parent="."]
+
+[node name="EnemyBaseBehaviour" type="Node" parent="Behaviours"]
+script = ExtResource( 2 )
+
+[connection signal="knockout" from="Behaviours/EnemyBaseBehaviour" to="." method="_on_EnemyBaseBehaviour_knockout"]
